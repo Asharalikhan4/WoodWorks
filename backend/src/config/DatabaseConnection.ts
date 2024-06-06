@@ -5,7 +5,7 @@ export default async function DatabaseConnection(): Promise<void> {
     try {
         const options: ConnectOptions = {};
 
-        if(!config.MONGODB_URL){
+        if(!config?.MONGODB_URL){
             throw new Error('MONGODB_URL environment variable is not defined');
         };
 

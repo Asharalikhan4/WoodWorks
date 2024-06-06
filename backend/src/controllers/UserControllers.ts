@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
 import bcrypt from "bcryptjs";
 import User from "../models/UserModel.js";
+import GenerateToken from "../utils/GenerateToken.js";
+import SaveToken from "../utils/SaveToken.js";
 
 export async function Signup(req: Request, res: Response) {
     try {
@@ -24,6 +26,9 @@ export async function Signup(req: Request, res: Response) {
             password: hashedPassword
         });
         await user.save();
+        const token: string = GenerateToken(user._id, user.email);
+        await SaveToken(user._id, token);
+
         return res.status(201).json({ message: "User created successfully", User: user });
     } catch (error) {
         return res.status(500).json({ message: "Internal server error", Error: error });
@@ -47,6 +52,9 @@ export async function Signin(req: Request, res: Response) {
         if(!isPasswordValid) {
             return res.status(400).json({ message: "Invalid credentials" });
         };
+
+        const token: string = GenerateToken(userExist._id, userExist.email);
+        await SaveToken(userExist._id, token);
 
         return res.status(200).json({ message: "User logged in successfully", User: userExist });
 
