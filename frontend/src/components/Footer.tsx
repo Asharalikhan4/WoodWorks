@@ -10,6 +10,7 @@ export default function Footer(): JSX.Element {
         <footer className="bg-[#121212] text-white">
             <div className="md:flex md:justify-around">
                 <div>
+                    <h3 className="">Abhi test kr rha hu</h3>
                     <h3 className="">Connect With Us</h3>
                     {
                         ConnectWithUsOptions?.map((option: string, index: number) => (
