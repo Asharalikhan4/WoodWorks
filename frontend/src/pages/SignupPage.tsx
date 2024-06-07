@@ -1,7 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+import { FaGithub } from "react-icons/fa";
 
 export default function SignupPage(): JSX.Element {
+
+    const navigate = useNavigate();
 
     const [userDetails, setUserDetails] = React.useState({
         name: "",
@@ -13,16 +17,28 @@ export default function SignupPage(): JSX.Element {
         setUserDetails({ ...userDetails, [e.target.name]: e.target.value });
     };
 
-    const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+    const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
         try {
             e.preventDefault();
-            console.log("User Details: ", userDetails);
+            const response = await fetch("http://localhost:8080/api/v1/user/signup", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(userDetails),
+            });
+            const data = await response.json();
+            if (response.status === 400 || response.ok === false) {
+                return toast.error(data?.message);
+            }
+            toast.success(data?.message);
+            navigate("/");
         } catch (error) {
-            console.error("Error in submitHandler: ", error);
+            toast.error("An error occurred. Please try again later.");
         } finally {
-            setUserDetails({ name: "", email: "", password: "" });
+            setUserDetails({name: "", email: "", password: "" });
         }
-    }
+    };
 
     return (
         <div className="flex min-h-screen justify-center px-4 md:py-4 sm:px-6 lg:px-8">
@@ -114,20 +130,13 @@ export default function SignupPage(): JSX.Element {
                         type="button"
                         className="inline-flex w-full justify-center rounded-md border border-[#d1d5db] bg-[#f8f8f8] py-2 px-4 text-sm font-medium text-[#6b7280] shadow-sm hover:bg-[#f3f4f6] focus:outline-none focus:ring-2 focus:ring-[#6366f1] focus:ring-offset-2 dark:bg-[#374151] dark:border-[#4b5563] dark:text-[#9ca3af] dark:hover:bg-[#4b5563] dark:hover:text-[#f8f8f8] dark:focus:ring-[#4f46e5]"
                     >
-                        <svg
-                            className="-ml-1 mr-2 h-5 w-5 text-[#9ca3af]"
-                            aria-hidden="true"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                        >
-                            <path d="M6.29 18.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0020 3.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.073 4.073 0 01.8 7.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 010 16.407a11.616 11.616 0 006.29 1.84" />
-                        </svg>
-                        Sign up with Twitter
+                        <FaGithub className="-ml-1 mr-2 h-5 w-5 text-[#9ca3af]" />
+                        Sign in with Github
                     </button>
                 </div>
                 <div className="text-center text-sm text-[#6b7280] dark:text-[#9ca3af]">
                     Already have an account?{" "}
-                    <Link to={"/signin"} className="font-medium text-[#6366f1] hover:text-[#4f46e5] dark:text-[#4f46e5] dark:hover:text-[#3730a3]">
+                    <Link to={"/signin"} className="font-medium text-[#6366f1] hover:text-[#4f46e5] dark:text-[#4f46e5] dark:hover:text-[#3730a3] underline">
                         Signin
                     </Link>
                 </div>
