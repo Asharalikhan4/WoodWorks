@@ -36,6 +36,7 @@ export async function Signup(req: Request, res: Response) {
 };
 
 export async function Signin(req: Request, res: Response) {
+    console.log("Signin called");
     try {
         const { email, password } = req.body;
 

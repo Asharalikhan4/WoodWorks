@@ -1,5 +1,6 @@
 import { config } from "./config/config.js";
 import express, { Request, Response } from "express";
+import cors from "cors";
 const app = express();
 
 // Routes
@@ -8,6 +9,9 @@ import DatabaseConnection from "./config/DatabaseConnection.js";
 
 // Middlewares
 app.use(express.json());
+app.use(cors({
+    origin: 'http://localhost:1234',
+}));
 
 app.get("/", (req: Request, res: Response) => {
     res.send("WoodWorks Api Working Fine!");
