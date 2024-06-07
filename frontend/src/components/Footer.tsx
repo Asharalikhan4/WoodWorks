@@ -10,36 +10,36 @@ export default function Footer(): JSX.Element {
         <footer className="bg-[#121212] text-white">
             <div className="md:flex md:justify-around">
                 <div>
-                    <h3 className="">Connect With Us</h3>
+                    <h3 className="py-2">Connect With Us</h3>
                     {
                         ConnectWithUsOptions?.map((option: string, index: number) => (
-                            <div key={index} className="font-light">{option}</div>
+                            <div key={index} className="font-light py-2">{option}</div>
                         ))
                     }
                 </div>
                 <div>
-                    <h3>Information</h3>
+                    <h3 className="py-2">Information</h3>
                     {
                         InformationOptions?.map((option: string, index: number) => (
-                            <div key={index} className="font-light">{option}</div>
+                            <div key={index} className="font-light py-2">{option}</div>
                         ))
                     }
                 </div>
                 <div>
-                    <div>Navigation</div>
+                    <div className="py-2">Navigation</div>
                     {
                         NavigationOptions?.map((option: string, index: number) => (
-                            <div key={index} className="font-light">{option}</div>
+                            <div key={index} className="font-light py-2">{option}</div>
                         ))
                     }
                 </div>
             </div>
-            <div className="md:flex md:justify-around md:items-center">
+            <div className="md:flex md:justify-between px-40 py-4 md:items-center">
                 <div>
                     <div>For inboxes with impeccable taste.</div>
-                    <input type="email" placeholder="Email" className="bg-[#121212] text-[#949494] border px-4 py-1" />
+                    <input type="email" placeholder="Email" className="bg-[#121212] text-[#949494] border px-4 py-1 mt-4 rounded-lg" />
                 </div>
-                <div className="flex space-x-5">
+                <div className="flex space-x-8">
                     <FaFacebook />
                     <FaInstagram />
                     <FaTwitter />
