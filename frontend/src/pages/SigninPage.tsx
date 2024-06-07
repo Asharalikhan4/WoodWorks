@@ -2,8 +2,29 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 export default function SigninPage(): JSX.Element {
+
+    const [userDetails, setUserDetails] = React.useState({
+        email: "",
+        password: "",
+    });
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setUserDetails({ ...userDetails, [e.target.name]: e.target.value });
+    };
+
+    const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+        try {
+            e.preventDefault();
+            console.log("User Details: ", userDetails);
+        } catch (error) {
+            console.error("Error in submitHandler: ", error);
+        } finally {
+            setUserDetails({email: "", password: "" });
+        }
+    }
+
     return (
-        <div className="flex min-h-screen justify-center px-4 py-12 sm:px-6 lg:px-8">
+        <div className="flex min-h-screen justify-center px-4 md:py-4 sm:px-6 lg:px-8">
             <div className="w-full max-w-md space-y-8">
                 <div>
                     <h2 className="mt-6 text-center text-3xl font-bold tracking-tight">
@@ -13,7 +34,7 @@ export default function SigninPage(): JSX.Element {
                         Discover the beauty of handcrafted wood products and join our growing community.
                     </p>
                 </div>
-                <form className="space-y-6" action="#" method="POST">
+                <form className="space-y-6" onSubmit={submitHandler}>
                     <div>
                         <label htmlFor="email" className="block text-sm font-medium">
                             Email address
@@ -25,6 +46,8 @@ export default function SigninPage(): JSX.Element {
                                 type="email"
                                 autoComplete="email"
                                 required
+                                value={userDetails.email}
+                                onChange={handleInputChange}
                                 className="block w-full appearance-none rounded-md border border-[#d1d5db] px-3 py-2 shadow-sm focus:border-[#6366f1] focus:outline-none focus:ring-[#6366f1] sm:text-sm"
                             />
                         </div>
@@ -40,6 +63,8 @@ export default function SigninPage(): JSX.Element {
                                 type="password"
                                 autoComplete="current-password"
                                 required
+                                value={userDetails.password}
+                                onChange={handleInputChange}
                                 className="block w-full appearance-none rounded-md border border-[#d1d5db] px-3 py-2 shadow-sm focus:border-[#6366f1] focus:outline-none focus:ring-[#6366f1] sm:text-sm"
                             />
                         </div>
