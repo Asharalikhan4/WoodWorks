@@ -3,8 +3,9 @@ import { createBrowserRouter } from "react-router-dom";
 
 import Layout from "../config/Layout";
 import ErrorPage from "../pages/ErrorPage";
-import Signin from "../pages/Signin";
-import Signup from "../pages/Signup";
+import SigninPage from "../pages/SigninPage";
+import SignupPage from "../pages/SignupPage";
+import CartPage from "../pages/CartPage";
 
 const router = createBrowserRouter([
   {
@@ -13,11 +14,15 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/signin",
-        element: <Signin />
+        element: <SigninPage />
       },
       {
         path: "/signup",
-        element: <Signup />
+        element: <SignupPage />
+      },
+      {
+        path: "/cart",
+        element: <CartPage />
       }
     ],
     errorElement: <ErrorPage />

@@ -7,11 +7,32 @@ const NavigationOptions: string[] = ["Privacy Policy", "Care & Instructions", "F
 
 export default function Footer(): JSX.Element {
     return (
-        <footer className="bg-[#121212] text-white h-[100vh]">
-            <div className="flex">
-                <div>1</div>
-                <div>2</div>
-                <div>3</div>
+        <footer className="bg-[#121212] text-white">
+            <div className="md:flex md:justify-around">
+                <div>
+                    <h3 className="">Connect With Us</h3>
+                    {
+                        ConnectWithUsOptions?.map((option: string, index: number) => (
+                            <div key={index} className="font-light">{option}</div>
+                        ))
+                    }
+                </div>
+                <div>
+                    <h3>Information</h3>
+                    {
+                        InformationOptions?.map((option: string, index: number) => (
+                            <div key={index} className="font-light">{option}</div>
+                        ))
+                    }
+                </div>
+                <div>
+                    <div>Navigation</div>
+                    {
+                        NavigationOptions?.map((option: string, index: number) => (
+                            <div key={index} className="font-light">{option}</div>
+                        ))
+                    }
+                </div>
             </div>
             <div className="md:flex md:justify-around md:items-center">
                 <div>
