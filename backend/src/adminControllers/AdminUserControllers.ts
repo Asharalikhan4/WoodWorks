@@ -9,3 +9,13 @@ export async function GetAllUser(req: Request, res: Response) {
         return res.status(500).json({ message: "Internal server error" });
     };
 };
+
+export async function DeleteUser(req: Request, res: Response) {
+    try {
+        const { id } = req.body;
+        await User.findByIdAndDelete(id);
+        return res.status(200).json({ message: "User deleted successfully" });
+    } catch (error) {
+        return res.status(500).json({ message: "Internal server error" });
+    };
+};
