@@ -7,6 +7,9 @@ const app = express();
 import UserRoutes from "./routes/UserRoutes.js";
 import DatabaseConnection from "./config/DatabaseConnection.js";
 
+// Admin Routes
+import AdminUserRoutes from "./adminRoutes/AdminUserRoutes.js";
+
 // Middlewares
 app.use(express.json());
 app.use(cors({
@@ -17,6 +20,7 @@ app.get("/", (req: Request, res: Response) => {
     res.send("WoodWorks Api Working Fine!");
 });
 app.use("/api/v1/user", UserRoutes);
+app.use("/api/v1/admin/user", AdminUserRoutes);
 
 app.listen(config.PORT, (): void => {
     DatabaseConnection();

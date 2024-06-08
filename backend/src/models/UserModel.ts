@@ -1,5 +1,5 @@
 import mongoose, { Schema, Model, model } from "mongoose";
-import UserDocument from "../types/UserModalTypes.js";
+import UserDocument from "../types/UserModelTypes.js";
 
 const UserSchema: Schema = new Schema<UserDocument>({
     name: {
@@ -47,5 +47,5 @@ const UserSchema: Schema = new Schema<UserDocument>({
     timestamps: true
 });
 
-const User: Model<any> = model("User", UserSchema);
+const User: Model<UserDocument> = model<UserDocument>("User", UserSchema);
 export default User;
