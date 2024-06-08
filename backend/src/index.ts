@@ -9,6 +9,7 @@ import DatabaseConnection from "./config/DatabaseConnection.js";
 
 // Admin Routes
 import AdminUserRoutes from "./adminRoutes/AdminUserRoutes.js";
+import AdminProductRoutes from "./adminRoutes/AdminProductRoutes.js";
 
 // Middlewares
 app.use(express.json());
@@ -21,6 +22,7 @@ app.get("/", (req: Request, res: Response) => {
 });
 app.use("/api/v1/user", UserRoutes);
 app.use("/api/v1/admin/user", AdminUserRoutes);
+app.use("/api/v1/admin/product", AdminProductRoutes);
 
 app.listen(config.PORT, (): void => {
     DatabaseConnection();

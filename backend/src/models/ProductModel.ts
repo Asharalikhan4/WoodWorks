@@ -8,7 +8,6 @@ const ProductSchema: Schema = new Schema<ProductDocument>({
     },
     totalSales: {
         type: Number,
-        required: true
     },
     title: {
         type: String,
@@ -39,11 +38,9 @@ const ProductSchema: Schema = new Schema<ProductDocument>({
     flashSale: {
         active: {
             type: Boolean,
-            required: true
         },
         discount: {
             type: Number,
-            required: true
         },
         startDate: {
             type: Date
@@ -52,11 +49,9 @@ const ProductSchema: Schema = new Schema<ProductDocument>({
             type: Date
         }
     },
-    ratings: [
-        {
-            type: Number
-        }
-    ]
+    ratings: {
+        type: Number
+    }
 }, {
     timestamps: true
 });
