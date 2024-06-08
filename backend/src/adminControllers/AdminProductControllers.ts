@@ -24,3 +24,12 @@ export async function CreateProduct(req: Request, res:Response) {
         return res.status(500).json({ message: "Internal server error", Error: error });
     };
 };
+
+export async function GetAllProducts(req: Request, res: Response) {
+    try {
+        const products = await Product.find({});
+        return res.status(200).json({ Products: products });
+    } catch (error) {
+        return res.status(500).json({ message: "Internal server error", Error: error });
+    };
+};
