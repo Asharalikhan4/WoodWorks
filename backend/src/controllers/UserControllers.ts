@@ -26,10 +26,10 @@ export async function Signup(req: Request, res: Response) {
             password: hashedPassword
         });
         await user.save();
-        const token: string = GenerateToken(user._id as string, user.email);
+        const token: string = GenerateToken(user._id as string, user.name as string);
         await SaveToken(user._id as string, token);
 
-        return res.status(201).json({ message: "User created successfully", User: user });
+        return res.status(201).json({ message: "User created successfully", Token: token });
     } catch (error) {
         return res.status(500).json({ message: "Internal server error", Error: error });
     }
@@ -53,7 +53,7 @@ export async function Signin(req: Request, res: Response) {
             return res.status(400).json({ message: "Invalid credentials" });
         };
 
-        const token: string = GenerateToken(userExist._id as string, userExist.email as string);
+        const token: string = GenerateToken(userExist._id as string, userExist.name as string);
         await SaveToken(userExist._id as string, token);
 
         return res.status(200).json({ message: "User logged in successfully", User: userExist });
