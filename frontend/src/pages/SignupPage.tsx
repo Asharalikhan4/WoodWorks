@@ -36,12 +36,12 @@ export default function SignupPage(): JSX.Element {
         } catch (error) {
             toast.error("An error occurred. Please try again later.");
         } finally {
-            setUserDetails({name: "", email: "", password: "" });
+            setUserDetails({ name: "", email: "", password: "" });
         }
     };
 
     return (
-        <div className="flex min-h-screen justify-center px-4 md:py-4 sm:px-6 lg:px-8">
+        <div className="flex justify-center px-4 md:py-4 sm:px-6 lg:px-8">
             <div className="w-full max-w-md space-y-8">
                 <div>
                     <h2 className="mt-6 text-center text-3xl font-bold tracking-tight">
@@ -124,6 +124,12 @@ export default function SignupPage(): JSX.Element {
                             Remember me
                         </label>
                     </div>
+                    <div className="text-center text-sm text-[#6b7280] dark:text-[#9ca3af]">
+                        Already have an account?{" "}
+                        <Link to={"/signin"} className="font-medium text-[#6366f1] hover:text-[#4f46e5] dark:text-[#4f46e5] dark:hover:text-[#3730a3] underline">
+                            Signin
+                        </Link>
+                    </div>
                 </div>
                 <div>
                     <button
@@ -133,12 +139,6 @@ export default function SignupPage(): JSX.Element {
                         <FaGithub className="-ml-1 mr-2 h-5 w-5 text-[#9ca3af]" />
                         Sign in with Github
                     </button>
-                </div>
-                <div className="text-center text-sm text-[#6b7280] dark:text-[#9ca3af]">
-                    Already have an account?{" "}
-                    <Link to={"/signin"} className="font-medium text-[#6366f1] hover:text-[#4f46e5] dark:text-[#4f46e5] dark:hover:text-[#3730a3] underline">
-                        Signin
-                    </Link>
                 </div>
             </div>
         </div>
