@@ -53,7 +53,7 @@ export default function SignupPage(): JSX.Element {
                 </div>
                 <form className="space-y-6" onSubmit={submitHandler}>
                     <div>
-                        <label htmlFor="name" className="block text-sm font-medium">
+                        <label htmlFor="name" className="block text-sm md:text-base font-medium">
                             Name
                         </label>
                         <div className="mt-1">
@@ -70,7 +70,7 @@ export default function SignupPage(): JSX.Element {
                         </div>
                     </div>
                     <div>
-                        <label htmlFor="email" className="block text-sm font-medium">
+                        <label htmlFor="email" className="block text-sm md:text-base font-medium">
                             Email address
                         </label>
                         <div className="mt-1">
@@ -87,7 +87,7 @@ export default function SignupPage(): JSX.Element {
                         </div>
                     </div>
                     <div>
-                        <label htmlFor="password" className="block text-sm font-medium">
+                        <label htmlFor="password" className="block text-sm md:text-base font-medium">
                             Password
                         </label>
                         <div className="mt-1">

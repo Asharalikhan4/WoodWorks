@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { FaGithub } from "react-icons/fa";
@@ -7,18 +7,47 @@ export default function SigninPage(): JSX.Element {
 
     const navigate = useNavigate();
 
-    const [userDetails, setUserDetails] = React.useState({
+    const [userDetails, setUserDetails] = useState({
+        email: "",
+        password: "",
+    });
+
+    const [errors, setErrors] = useState({
         email: "",
         password: "",
     });
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setUserDetails({ ...userDetails, [e.target.name]: e.target.value });
+        setErrors({ ...errors, [e.target.name]: "" });
+    };
+
+    const handleInputBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        let errorMessage = "";
+
+        if (name === "email") {
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(value)) {
+                errorMessage = "Please enter a valid email address.";
+            }
+        } else if (name === "password") {
+            // Password validation
+            if (value.length < 6) {
+                errorMessage = "Password must be at least 6 characters long.";
+            }
+        }
+
+        setErrors({ ...errors, [name]: errorMessage });
     };
 
     const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
         try {
             e.preventDefault();
+            if (errors.email || errors.password) {
+                return;
+            }
             const response = await fetch("http://localhost:8080/api/v1/user/signin", {
                 method: "POST",
                 headers: {
@@ -36,8 +65,11 @@ export default function SigninPage(): JSX.Element {
             toast.error("An error occurred. Please try again later.");
         } finally {
             setUserDetails({email: "", password: "" });
+            setErrors({ email: "", password: "" });
         }
     };
+
+    const isFormValid = !errors.email && !errors.password;
 
     return (
         <div className="flex justify-center px-4 md:py-4 sm:px-6 lg:px-8">
@@ -52,7 +84,7 @@ export default function SigninPage(): JSX.Element {
                 </div>
                 <form className="space-y-6" onSubmit={submitHandler}>
                     <div>
-                        <label htmlFor="email" className="block text-sm font-medium">
+                        <label htmlFor="email" className="block text-sm md:text-base font-medium">
                             Email address
                         </label>
                         <div className="mt-1">
@@ -64,12 +96,16 @@ export default function SigninPage(): JSX.Element {
                                 required
                                 value={userDetails.email}
                                 onChange={handleInputChange}
+                                onBlur={handleInputBlur}
                                 className="block w-full appearance-none rounded-md border border-[#d1d5db] px-3 py-2 shadow-sm focus:border-[#6366f1] focus:outline-none focus:ring-[#6366f1] sm:text-sm"
                             />
                         </div>
+                        {errors.email && (
+                                <p className="mt-1 text-xs md:text-sm text-red-500">{errors.email}</p>
+                            )}
                     </div>
                     <div>
-                        <label htmlFor="password" className="block text-sm font-medium">
+                        <label htmlFor="password" className="block text-sm md:text-base font-medium">
                             Password
                         </label>
                         <div className="mt-1">
@@ -81,14 +117,23 @@ export default function SigninPage(): JSX.Element {
                                 required
                                 value={userDetails.password}
                                 onChange={handleInputChange}
+                                onBlur={handleInputBlur}
                                 className="block w-full appearance-none rounded-md border border-[#d1d5db] px-3 py-2 shadow-sm focus:border-[#6366f1] focus:outline-none focus:ring-[#6366f1] sm:text-sm"
                             />
                         </div>
+                        {errors.password && (
+                                <p className="mt-1 text-xs md:text-sm text-red-500">{errors.password}</p>
+                            )}
                     </div>
                     <div>
                         <button
                             type="submit"
-                            className="flex w-full justify-center rounded-md border border-transparent bg-[#6366f1] py-2 px-4 text-sm font-medium text-[#f8f8f8] shadow-sm hover:bg-[#4f46e5] focus:outline-none focus:ring-2 focus:ring-[#6366f1] focus:ring-offset-2 dark:bg-[#4f46e5] dark:hover:bg-[#3730a3] dark:focus:ring-[#4f46e5]"
+                            disabled={!isFormValid}
+                            className={`flex w-full justify-center rounded-md border border-transparent py-2 px-4 text-sm font-medium text-[#f8f8f8] shadow-sm hover:bg-[#4f46e5] focus:outline-none focus:ring-2 focus:ring-[#6366f1] focus:ring-offset-2 dark:bg-[#4f46e5] dark:hover:bg-[#3730a3] dark:focus:ring-[#4f46e5] ${
+                                isFormValid
+                                    ? "bg-[#6366f1] dark:bg-[#4f46e5]"
+                                    : "bg-[#9ca3af] dark:bg-[#6b7280] cursor-not-allowed"
+                            }`}
                         >
                             Sign in
                         </button>
