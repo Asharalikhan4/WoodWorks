@@ -14,7 +14,7 @@ export default function Layout() {
             <Header />
             <Outlet />
             {
-                lastPathSegment !== "signin" && lastPathSegment !== "signup" ? <Footer /> : null
+                lastPathSegment !== "signin" && lastPathSegment !== "signup" && lastPathSegment !== "redux" ? <Footer /> : null
             }
         </div>
     );

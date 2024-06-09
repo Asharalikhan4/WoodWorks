@@ -7,6 +7,7 @@ import SigninPage from "../pages/SigninPage";
 import SignupPage from "../pages/SignupPage";
 import CartPage from "../pages/CartPage";
 import HomePage from "../pages/HomePage";
+import ReduxPage from "../pages/ReduxPage";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
       {
         path: "/cart",
         element: <CartPage />
+      },
+      {
+        path: "/redux",
+        element: <ReduxPage />
       }
     ],
     errorElement: <ErrorPage />
