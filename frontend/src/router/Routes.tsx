@@ -6,12 +6,17 @@ import ErrorPage from "../pages/ErrorPage";
 import SigninPage from "../pages/SigninPage";
 import SignupPage from "../pages/SignupPage";
 import CartPage from "../pages/CartPage";
+import HomePage from "../pages/HomePage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
     children: [
+      {
+        path: "/",
+        element: <HomePage />
+      },
       {
         path: "/signin",
         element: <SigninPage />
