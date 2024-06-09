@@ -12,8 +12,8 @@ export default function ProductList(props: ProductListTypes): JSX.Element {
     const { heading, subHeading, className } = props;
 
     return (
-        <div className={className}>
-            <div className="lg:container lg:mx-auto lg:py-8 lg:space-y-2">
+        <div className={`${className} py-4`}>
+            <div className="lg:container lg:mx-auto lg:my-5 lg:space-y-2">
                 <div className="lg:text-[40px]">{heading}</div>
                 {
                     subHeading ? <div className="text-[#ffffffbf]">{subHeading}</div> : null
