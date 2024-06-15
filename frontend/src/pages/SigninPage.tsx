@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { FaGithub } from "react-icons/fa";
+import Cookies from "js-cookie";
 
 export default function SigninPage(): JSX.Element {
 
@@ -27,14 +28,12 @@ export default function SigninPage(): JSX.Element {
         let errorMessage = "";
 
         if (name === "email") {
-            // Email validation
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(value)) {
                 errorMessage = "Please enter a valid email address.";
             }
         } else if (name === "password") {
-            // Password validation
-            if (value.length < 6) {
+            if (value.length < 3) {
                 errorMessage = "Password must be at least 6 characters long.";
             }
         }
@@ -59,8 +58,9 @@ export default function SigninPage(): JSX.Element {
             if (response.status === 400 || response.ok === false) {
                 return toast.error(data?.message);
             }
+            Cookies.set("jwt_token", data?.token, { httpOnly: true, sameSite: 'strict' });
             toast.success(data?.message);
-            navigate("/");
+            // navigate("/");
         } catch (error) {
             toast.error("An error occurred. Please try again later.");
         } finally {

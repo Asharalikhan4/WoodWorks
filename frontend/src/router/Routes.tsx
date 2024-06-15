@@ -8,6 +8,8 @@ import SignupPage from "../pages/SignupPage";
 import CartPage from "../pages/CartPage";
 import HomePage from "../pages/HomePage";
 import ReduxPage from "../pages/ReduxPage";
+import ProtectedRoute from "../utils/protectedRoutes";
+import isAuthenticated from "../utils/isAuthenticated";
 
 const router = createBrowserRouter([
   {
@@ -28,11 +30,19 @@ const router = createBrowserRouter([
       },
       {
         path: "/cart",
-        element: <CartPage />
+        element: (
+          <ProtectedRoute isAuthenticated={isAuthenticated()}>
+            <CartPage />
+          </ProtectedRoute>
+        )
       },
       {
         path: "/redux",
-        element: <ReduxPage />
+        element: (
+          <ProtectedRoute isAuthenticated={isAuthenticated()}>
+            <ReduxPage />
+          </ProtectedRoute>
+        )
       }
     ],
     errorElement: <ErrorPage />
