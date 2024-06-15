@@ -76,7 +76,7 @@ export default function SigninPage(): JSX.Element {
             <div className="w-full max-w-md space-y-8">
                 <div>
                     <h2 className="mt-6 text-center text-3xl font-bold tracking-tight">
-                        Sign in for WoodWorks.
+                        Admin Sign in for WoodWorks.
                     </h2>
                     <p className="mt-2 text-center text-sm text-[#6b7280] dark:text-[#9ca3af]">
                         Discover the beauty of handcrafted wood products and join our growing community.

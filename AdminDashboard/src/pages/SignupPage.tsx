@@ -1,53 +1,26 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { FaGithub } from "react-icons/fa";
-import Cookies from "js-cookie";
 
-export default function SigninPage(): JSX.Element {
+export default function SignupPage(): JSX.Element {
 
     const navigate = useNavigate();
 
-    const [userDetails, setUserDetails] = useState({
-        email: "",
-        password: "",
-    });
-
-    const [errors, setErrors] = useState({
+    const [userDetails, setUserDetails] = React.useState({
+        name: "",
         email: "",
         password: "",
     });
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setUserDetails({ ...userDetails, [e.target.name]: e.target.value });
-        setErrors({ ...errors, [e.target.name]: "" });
-    };
-
-    const handleInputBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
-        let errorMessage = "";
-
-        if (name === "email") {
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(value)) {
-                errorMessage = "Please enter a valid email address.";
-            }
-        } else if (name === "password") {
-            if (value.length < 3) {
-                errorMessage = "Password must be at least 6 characters long.";
-            }
-        }
-
-        setErrors({ ...errors, [name]: errorMessage });
     };
 
     const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
         try {
             e.preventDefault();
-            if (errors.email || errors.password) {
-                return;
-            }
-            const response = await fetch("http://localhost:8080/api/v1/user/signin", {
+            const response = await fetch("http://localhost:8080/api/v1/user/signup", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -58,31 +31,44 @@ export default function SigninPage(): JSX.Element {
             if (response.status === 400 || response.ok === false) {
                 return toast.error(data?.message);
             }
-            Cookies.set("jwt_token", data?.token, { httpOnly: true, sameSite: 'strict' });
             toast.success(data?.message);
-            // navigate("/");
+            navigate("/");
         } catch (error) {
             toast.error("An error occurred. Please try again later.");
         } finally {
-            setUserDetails({email: "", password: "" });
-            setErrors({ email: "", password: "" });
+            setUserDetails({ name: "", email: "", password: "" });
         }
     };
-
-    const isFormValid = !errors.email && !errors.password;
 
     return (
         <div className="flex justify-center px-4 md:py-4 sm:px-6 lg:px-8">
             <div className="w-full max-w-md space-y-8">
                 <div>
                     <h2 className="mt-6 text-center text-3xl font-bold tracking-tight">
-                        Sign in for WoodWorks.
+                        Admin Sign up for WoodWorks.
                     </h2>
                     <p className="mt-2 text-center text-sm text-[#6b7280] dark:text-[#9ca3af]">
                         Discover the beauty of handcrafted wood products and join our growing community.
                     </p>
                 </div>
                 <form className="space-y-6" onSubmit={submitHandler}>
+                    <div>
+                        <label htmlFor="name" className="block text-sm md:text-base font-medium">
+                            Name
+                        </label>
+                        <div className="mt-1">
+                            <input
+                                id="name"
+                                name="name"
+                                type="text"
+                                autoComplete="name"
+                                required
+                                value={userDetails.name}
+                                onChange={handleInputChange}
+                                className="block w-full appearance-none rounded-md border border-[#d1d5db] px-3 py-2 shadow-sm focus:border-[#6366f1] focus:outline-none focus:ring-[#6366f1] sm:text-sm"
+                            />
+                        </div>
+                    </div>
                     <div>
                         <label htmlFor="email" className="block text-sm md:text-base font-medium">
                             Email address
@@ -96,13 +82,9 @@ export default function SigninPage(): JSX.Element {
                                 required
                                 value={userDetails.email}
                                 onChange={handleInputChange}
-                                onBlur={handleInputBlur}
                                 className="block w-full appearance-none rounded-md border border-[#d1d5db] px-3 py-2 shadow-sm focus:border-[#6366f1] focus:outline-none focus:ring-[#6366f1] sm:text-sm"
                             />
                         </div>
-                        {errors.email && (
-                                <p className="mt-1 text-xs md:text-sm text-red-500">{errors.email}</p>
-                            )}
                     </div>
                     <div>
                         <label htmlFor="password" className="block text-sm md:text-base font-medium">
@@ -117,25 +99,16 @@ export default function SigninPage(): JSX.Element {
                                 required
                                 value={userDetails.password}
                                 onChange={handleInputChange}
-                                onBlur={handleInputBlur}
                                 className="block w-full appearance-none rounded-md border border-[#d1d5db] px-3 py-2 shadow-sm focus:border-[#6366f1] focus:outline-none focus:ring-[#6366f1] sm:text-sm"
                             />
                         </div>
-                        {errors.password && (
-                                <p className="mt-1 text-xs md:text-sm text-red-500">{errors.password}</p>
-                            )}
                     </div>
                     <div>
                         <button
                             type="submit"
-                            disabled={!isFormValid}
-                            className={`flex w-full justify-center rounded-md border border-transparent py-2 px-4 text-sm font-medium text-[#f8f8f8] shadow-sm hover:bg-[#4f46e5] focus:outline-none focus:ring-2 focus:ring-[#6366f1] focus:ring-offset-2 dark:bg-[#4f46e5] dark:hover:bg-[#3730a3] dark:focus:ring-[#4f46e5] ${
-                                isFormValid
-                                    ? "bg-[#6366f1] dark:bg-[#4f46e5]"
-                                    : "bg-[#9ca3af] dark:bg-[#6b7280] cursor-not-allowed"
-                            }`}
+                            className="flex w-full justify-center rounded-md border border-transparent bg-[#6366f1] py-2 px-4 text-sm font-medium text-[#f8f8f8] shadow-sm hover:bg-[#4f46e5] focus:outline-none focus:ring-2 focus:ring-[#6366f1] focus:ring-offset-2 dark:bg-[#4f46e5] dark:hover:bg-[#3730a3] dark:focus:ring-[#4f46e5]"
                         >
-                            Sign in
+                            Sign up
                         </button>
                     </div>
                 </form>
@@ -151,13 +124,11 @@ export default function SigninPage(): JSX.Element {
                             Remember me
                         </label>
                     </div>
-                    <div className="text-sm">
-                        <a
-                            href="#"
-                            className="font-medium text-[#6366f1] hover:text-[#4f46e5] dark:text-[#4f46e5] dark:hover:text-[#3730a3]"
-                        >
-                            Forgot your password?
-                        </a>
+                    <div className="text-center text-sm text-[#6b7280] dark:text-[#9ca3af]">
+                        Already have an account?{" "}
+                        <Link to={"/signin"} className="font-medium text-[#6366f1] hover:text-[#4f46e5] dark:text-[#4f46e5] dark:hover:text-[#3730a3] underline">
+                            Signin
+                        </Link>
                     </div>
                 </div>
                 <div>
@@ -168,12 +139,6 @@ export default function SigninPage(): JSX.Element {
                         <FaGithub className="-ml-1 mr-2 h-5 w-5 text-[#9ca3af]" />
                         Sign in with Github
                     </button>
-                </div>
-                <div className="text-center text-sm text-[#6b7280] dark:text-[#9ca3af]">
-                    Didn't have an account?{" "}
-                    <Link to={"/signup"} className="font-medium text-[#6366f1] hover:text-[#4f46e5] dark:text-[#4f46e5] dark:hover:text-[#3730a3] underline">
-                        Signup
-                    </Link>
                 </div>
             </div>
         </div>

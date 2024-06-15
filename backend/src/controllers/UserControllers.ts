@@ -8,12 +8,12 @@ export async function Signup(req: Request, res: Response) {
     try {
         const { name, email, password } = req.body;
 
-        if(!name || !email || !password) {
+        if (!name || !email || !password) {
             return res.status(400).json({ message: "All fields are required" });
         };
 
         const userExist = await User.findOne({ email });
-        if(userExist) {
+        if (userExist) {
             return res.status(400).json({ message: "User already exist, Please Login." });
         };
 
@@ -29,7 +29,9 @@ export async function Signup(req: Request, res: Response) {
         const token: string = GenerateToken(user._id as string, user.name as string);
         await SaveToken(user._id as string, token);
 
-        return res.status(201).json({ message: "User created successfully", Token: token });
+        const { password: _, token: __, ...userData } = user.toObject();
+
+        return res.status(201).json({ message: "User created successfully", User: userData, token: token });
     } catch (error) {
         return res.status(500).json({ message: "Internal server error", Error: error });
     }
@@ -39,24 +41,26 @@ export async function Signin(req: Request, res: Response) {
     try {
         const { email, password } = req.body;
 
-        if(!email || !password) {
+        if (!email || !password) {
             return res.status(400).json({ message: "All fields are required" });
         };
 
         const userExist = await User.findOne({ email });
-        if(!userExist) {
+        if (!userExist) {
             return res.status(400).json({ message: "User not found" });
         };
 
         const isPasswordValid = await bcrypt.compare(password, userExist?.password);
-        if(!isPasswordValid) {
+        if (!isPasswordValid) {
             return res.status(400).json({ message: "Invalid credentials" });
         };
 
         const token: string = GenerateToken(userExist._id as string, userExist.name as string);
         await SaveToken(userExist._id as string, token);
 
-        return res.status(200).json({ message: "User logged in successfully", User: userExist });
+        const { password: _, token: __, ...userData } = userExist.toObject();
+
+        return res.status(200).json({ message: "User logged in successfully", User: userData, token: token });
 
     } catch (error) {
         return res.status(500).json({ message: "Internal server error" });

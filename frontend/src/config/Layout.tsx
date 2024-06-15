@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 
 import Footer from "../components/Footer";
@@ -10,12 +10,12 @@ export default function Layout() {
     const lastPathSegment = location?.pathname.split('/').pop();
 
     return (
-        <div>
+        <Fragment>
             <Header />
             <Outlet />
             {
                 lastPathSegment !== "signin" && lastPathSegment !== "signup" && lastPathSegment !== "redux" ? <Footer /> : null
             }
-        </div>
+        </Fragment>
     );
 };
