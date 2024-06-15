@@ -15,10 +15,6 @@ const columns = [
 
 export default function Users(): JSX.Element {
 
-  console.log("Users");
-
-  console.log("Base Url", BASE_URL)
-
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -28,7 +24,6 @@ export default function Users(): JSX.Element {
         const response = await fetch(`${BASE_URL}/api/v1/admin/user/all-users`);
         const data = await response.json();
         setUsers(data?.Users);
-        console.log("Users", data?.Users);
     } catch (error) {
         console.error(error);
     } finally {

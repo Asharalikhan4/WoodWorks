@@ -15,8 +15,6 @@ interface TableProps {
 }
 
 export default function Table({ data, columns }: TableProps): JSX.Element {
-    console.log("Columns: ", columns);
-    console.log("Data: ", data);
     return (
         <div className="overflow-x-auto">
             <table className="min-w-full divide-y divide-gray-200">
