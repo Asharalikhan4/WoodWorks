@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Table from "../components/Table";
 import { BASE_URL } from "../utils/constants";
+import ApiRequest from "../api/ApiRequest";
 
 interface User {
   _id: string;
@@ -13,7 +14,7 @@ const columns = [
   { label: 'Email', accessor: 'email' },
 ];
 
-export default function Users(): JSX.Element {
+export default function UsersPage(): JSX.Element {
 
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -34,6 +35,10 @@ export default function Users(): JSX.Element {
   useEffect(() => {
     fetchUsers();
   }, []);
+
+  if (loading) {
+    return <div className="container mx-auto p-4">Loading...</div>;
+  }
 
   return (
     <div className="container mx-auto p-4">

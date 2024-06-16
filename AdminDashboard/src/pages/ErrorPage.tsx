@@ -4,18 +4,18 @@ import { useRouteError } from "react-router-dom";
 
 export default function ErrorPage(): JSX.Element {
 
-    const error = useRouteError() as {statusText?: string | undefined; status?: number | undefined;};
+  const error = useRouteError() as { statusText?: string | undefined; status?: number | undefined; };
 
-    return (
-        // <div id="error-page">
-        //     <h1>Oops!</h1>
-        //     <p>Sorry, an unexpected error has occurred.</p>
-        //     <p>
-        //         <i>{error?.statusText || error?.status}</i>
-        //     </p>
-        //     <Link to={"/"}>GO Back Home</Link>
-        // </div>
-        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+  return (
+    // <div id="error-page">
+    //     <h1>Oops!</h1>
+    //     <p>Sorry, an unexpected error has occurred.</p>
+    //     <p>
+    //         <i>{error?.statusText || error?.status}</i>
+    //     </p>
+    //     <Link to={"/"}>GO Back Home</Link>
+    // </div>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
       <div className="max-w-md mx-auto">
         {/* <ErrorIllustration className="w-full h-auto mb-8" /> */}
         <div className="text-center">
@@ -32,5 +32,5 @@ export default function ErrorPage(): JSX.Element {
         </div>
       </div>
     </div>
-    );
+  );
 };

@@ -2,30 +2,31 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { FaGithub } from "react-icons/fa";
+import { BASE_URL } from "../utils/constants";
 
 export default function SignupPage(): JSX.Element {
 
     const navigate = useNavigate();
 
-    const [userDetails, setUserDetails] = React.useState({
+    const [adminDetails, setAdminDetails] = React.useState({
         name: "",
         email: "",
         password: "",
     });
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setUserDetails({ ...userDetails, [e.target.name]: e.target.value });
+        setAdminDetails({ ...adminDetails, [e.target.name]: e.target.value });
     };
 
     const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
         try {
             e.preventDefault();
-            const response = await fetch("http://localhost:8080/api/v1/user/signup", {
+            const response = await fetch(`${BASE_URL}/api/v1/user/signup`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify(userDetails),
+                body: JSON.stringify(adminDetails),
             });
             const data = await response.json();
             if (response.status === 400 || response.ok === false) {
@@ -36,7 +37,7 @@ export default function SignupPage(): JSX.Element {
         } catch (error) {
             toast.error("An error occurred. Please try again later.");
         } finally {
-            setUserDetails({ name: "", email: "", password: "" });
+            setAdminDetails({ name: "", email: "", password: "" });
         }
     };
 
@@ -63,7 +64,7 @@ export default function SignupPage(): JSX.Element {
                                 type="text"
                                 autoComplete="name"
                                 required
-                                value={userDetails.name}
+                                value={adminDetails.name}
                                 onChange={handleInputChange}
                                 className="block w-full appearance-none rounded-md border border-[#d1d5db] px-3 py-2 shadow-sm focus:border-[#6366f1] focus:outline-none focus:ring-[#6366f1] sm:text-sm"
                             />
@@ -80,7 +81,7 @@ export default function SignupPage(): JSX.Element {
                                 type="email"
                                 autoComplete="email"
                                 required
-                                value={userDetails.email}
+                                value={adminDetails.email}
                                 onChange={handleInputChange}
                                 className="block w-full appearance-none rounded-md border border-[#d1d5db] px-3 py-2 shadow-sm focus:border-[#6366f1] focus:outline-none focus:ring-[#6366f1] sm:text-sm"
                             />
@@ -97,7 +98,7 @@ export default function SignupPage(): JSX.Element {
                                 type="password"
                                 autoComplete="current-password"
                                 required
-                                value={userDetails.password}
+                                value={adminDetails.password}
                                 onChange={handleInputChange}
                                 className="block w-full appearance-none rounded-md border border-[#d1d5db] px-3 py-2 shadow-sm focus:border-[#6366f1] focus:outline-none focus:ring-[#6366f1] sm:text-sm"
                             />
