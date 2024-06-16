@@ -12,7 +12,7 @@ export default function HomePage(): JSX.Element {
         <div>
             <Hero />
             <MadeInIndia />
-            <ProductList heading="New Arrival" className="bg-[#121212] text-[#ffffff]" />
+            <ProductList heading="New Arrivals" className="bg-[#121212] text-[#ffffff]" />
             <MadeToOrder />
             <ProductList heading="Shop Bestsellers" subHeading="OUR GREATEST HITS" className="bg-[#121212] text-[#ffffff]" />
             <ProductList heading="Sofa Collection" className="bg-[#ffffff] text-[#121212]" />
