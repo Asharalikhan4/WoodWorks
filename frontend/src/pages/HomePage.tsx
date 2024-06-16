@@ -6,6 +6,8 @@ import BeInspired from "../components/HomePageComponents/BeInspired";
 import Accordion from "../components/HomePageComponents/Accordion";
 import Hero from "../components/HomePageComponents/Hero";
 import Collections from "../components/HomePageComponents/Collections";
+import VocalForLocal from "../components/HomePageComponents/VocalForLocal";
+import FooterList from "../components/HomePageComponents/FooterList";
 
 export default function HomePage(): JSX.Element {
     return (
@@ -19,7 +21,10 @@ export default function HomePage(): JSX.Element {
             <BeInspired />
             <ProductList heading="Marwari Antique Collection" className="bg-[#121212] text-[#ffffff]" />
             <Collections />
+            <VocalForLocal />
             <ProductList heading="Bowls & Boards" className="bg-[#121212] text-[#ffffff]" />
+            <FooterList />
+            <Accordion />
         </div>
     );
 };

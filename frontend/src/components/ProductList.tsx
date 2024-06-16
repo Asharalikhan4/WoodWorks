@@ -12,7 +12,7 @@ export default function ProductList(props: ProductListTypes): JSX.Element {
     const { heading, subHeading, className } = props;
 
     return (
-        <div className={`${className} space-y-4 py-6`}>
+        <div className={`${className} space-y-4 py-6 md:py-8`}>
             <div className="mobileContainer md:container lg:mx-auto space-y-3">
                 <div className="text-3xl md:text-[40px]">{heading}</div>
                 {
