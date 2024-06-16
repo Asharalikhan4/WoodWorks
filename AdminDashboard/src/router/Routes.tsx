@@ -4,12 +4,12 @@ import HomePage from "../pages/HomePage";
 import AboutUsPage from "../pages/AboutUsPage";
 import ContactUsPage from "../pages/ContactUsPage";
 import Layout from "../config/Layout";
-import Users from "../pages/Users";
 import ErrorPage from "../pages/ErrorPage";
 import SigninPage from "../pages/SigninPage";
 import SignupPage from "../pages/SignupPage";
 import isAuthenticated from "../utils/isAuthenticated";
 import ProtectedRoute from "../utils/protectedRoute";
+import UsersPage from "../pages/UsersPage";
 
 const router = createBrowserRouter([
     {
@@ -44,7 +44,7 @@ const router = createBrowserRouter([
                 path: "/users",
                 element: (
                     <ProtectedRoute isAuthenticated={isAuthenticated()}>
-                        <Users />
+                        <UsersPage />
                     </ProtectedRoute>
                 ),
             }
