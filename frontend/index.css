@@ -7,5 +7,5 @@ body {
 }
 
 .mobileContainer {
-    @apply px-6 mx-auto;
+    @apply px-4 mx-auto md:px-0 lg:px-0;
 }
