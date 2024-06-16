@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 interface ProductPropsTypes {
     imageUrl: string;
@@ -12,7 +13,7 @@ export default function ProductCard(props: ProductPropsTypes): JSX.Element {
     const { imageUrl, productName, productPrice, collectionName } = props;
     
     return (
-        <div className="hover:cursor-pointer hover:underline">
+        <Link to={`product/${productName}`} className="hover:underline">
             <div className="overflow-hidden">
                 <img src={imageUrl} alt="product image" className="transition-transform duration-500 ease-in-out transform hover:scale-110" />
             </div>
@@ -21,6 +22,6 @@ export default function ProductCard(props: ProductPropsTypes): JSX.Element {
                 {productPrice ? <div className="text-sm">₹{productPrice}</div> : <></>}
                 {collectionName ? <div className="">{collectionName}</div> : <></>}
             </div>
-        </div>
+        </Link>
     );
 };

@@ -10,6 +10,7 @@ import HomePage from "../pages/HomePage";
 import ReduxPage from "../pages/ReduxPage";
 import ProtectedRoute from "../utils/protectedRoutes";
 import isAuthenticated from "../utils/isAuthenticated";
+import ProductPage from "../pages/ProductPage";
 
 const router = createBrowserRouter([
   {
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
             <ReduxPage />
           </ProtectedRoute>
         )
+      },
+      {
+        path: "/product/:id",
+        element: <ProductPage />
       }
     ],
     errorElement: <ErrorPage />
