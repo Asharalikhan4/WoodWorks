@@ -7,6 +7,7 @@ import Accordion from "../components/HomePageComponents/Accordion";
 import Hero from "../components/HomePageComponents/Hero";
 import Collections from "../components/HomePageComponents/Collections";
 import VocalForLocal from "../components/HomePageComponents/VocalForLocal";
+import FooterList from "../components/HomePageComponents/FooterList";
 
 export default function HomePage(): JSX.Element {
     return (
@@ -22,6 +23,7 @@ export default function HomePage(): JSX.Element {
             <Collections />
             <VocalForLocal />
             <ProductList heading="Bowls & Boards" className="bg-[#121212] text-[#ffffff]" />
+            <FooterList />
         </div>
     );
 };
