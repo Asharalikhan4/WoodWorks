@@ -2,37 +2,72 @@ import React from "react";
 import { GoSearch } from "react-icons/go";
 import { FiUser } from "react-icons/fi";
 import { BsCart3 } from "react-icons/bs";
-import { RxCross2 } from "react-icons/rx";
+import { RxCross2, RxHamburgerMenu } from "react-icons/rx";
 import { Link } from "react-router-dom";
 
+const NavbarMenuItems: string[] = ["Living Room", "Bedroom", "Cabinetry", "Dining & Kitchen", "Seating", "LKH Collection", "Home Essentials"];
 
 export default function Navbar(): JSX.Element {
 
     const [searchOpen, setSearchOpen] = React.useState<boolean>(false);
+    const [mobileMenu, setMobileMenu] = React.useState<boolean>(false);
 
     const toggleSearchBar = (): void => {
         setSearchOpen(!searchOpen);
     };
 
+    const handleMenuClick = () => {
+        setMobileMenu(!mobileMenu);
+    };
+
     return (
-        <nav className="hidden md:container md:mx-auto md:flex md:justify-between md:text-2xl md:py-6">
+        <nav>
+            <div className="bg-white flex justify-between text-black md:hidden lg:hidden items-center h-10 px-2">
+                <div onClick={handleMenuClick}>
+                    {
+                        mobileMenu ? <RxCross2 /> : <RxHamburgerMenu />
+                    }
+                </div>
+                <div className="text-xl font-semibold">WoodWorks.</div>
+                <div className="flex">
+                    <div><GoSearch /></div>
+                    <div><BsCart3 /></div>
+                </div>
+            </div>
+
             {
-                searchOpen ? (
-                    <React.Fragment>
-                        <input type="email" placeholder="Search for products" className="border outline-none" />
-                        <div onClick={toggleSearchBar} className="cursor-pointer text-2xl"><RxCross2 /></div>
-                    </React.Fragment>
+                mobileMenu ? (
+                    <div className="h-svh px-6 space-y-4 py-6 text-lg">
+                        {
+                            NavbarMenuItems?.map((item: string, index: number) => (
+                                <div key={index} className="flex items-center cursor-pointer hover:underline">{item}</div>
+                            ))
+                        }
+                    </div>
                 ) : (
-                    <React.Fragment>
-                        <div className="text-2xl cursor-pointer" onClick={toggleSearchBar}><GoSearch /></div>
-                        <Link to={"/"}>WoodWorks.</Link>
-                        <div className="flex space-x-3">
-                            <Link to={"/signin"} className="text-2xl"><FiUser /></Link>
-                            <Link to={"/cart"} className="text-2xl"><BsCart3 /></Link>
-                        </div>
-                    </React.Fragment>
+                    <></>
                 )
             }
+
+            <div className="hidden md:container md:mx-auto md:flex md:justify-between md:text-2xl md:py-6">
+                {
+                    searchOpen ? (
+                        <React.Fragment>
+                            <input type="email" placeholder="Search for products" className="border outline-none" />
+                            <div onClick={toggleSearchBar} className="cursor-pointer text-2xl"><RxCross2 /></div>
+                        </React.Fragment>
+                    ) : (
+                        <React.Fragment>
+                            <div className="text-2xl cursor-pointer" onClick={toggleSearchBar}><GoSearch /></div>
+                            <Link to={"/"}>WoodWorks.</Link>
+                            <div className="flex space-x-3">
+                                <Link to={"/signin"} className="text-2xl"><FiUser /></Link>
+                                <Link to={"/cart"} className="text-2xl"><BsCart3 /></Link>
+                            </div>
+                        </React.Fragment>
+                    )
+                }
+            </div>
         </nav>
     );
 };
