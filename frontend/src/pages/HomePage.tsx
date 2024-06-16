@@ -24,6 +24,7 @@ export default function HomePage(): JSX.Element {
             <VocalForLocal />
             <ProductList heading="Bowls & Boards" className="bg-[#121212] text-[#ffffff]" />
             <FooterList />
+            <Accordion />
         </div>
     );
 };
