@@ -5,3 +5,7 @@
 body {
     @apply font-OpenSans;
 }
+
+.mobileContainer {
+    @apply px-6 mx-auto;
+}
