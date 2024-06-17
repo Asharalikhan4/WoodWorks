@@ -31,11 +31,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/cart",
-        element: (
-          <ProtectedRoute isAuthenticated={isAuthenticated()}>
-            <CartPage />
-          </ProtectedRoute>
-        )
+        element: <CartPage />
       },
       {
         path: "/redux",

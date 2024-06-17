@@ -41,10 +41,10 @@ export default function Navbar(): JSX.Element {
                                     mobileMenu ? <RxCross2 /> : <RxHamburgerMenu />
                                 }
                             </div>
-                            <div className="">WoodWorks.</div>
+                            <Link to={"/"}>WoodWorks.</Link>
                             <div className="flex space-x-2">
-                            <div className="cursor-pointer" onClick={toggleMobileSearchBar}><GoSearch /></div>
-                                <BsCart3 />
+                                <div className="cursor-pointer" onClick={toggleMobileSearchBar}><GoSearch /></div>
+                                <Link to={"/cart"}><BsCart3 /></Link>
                             </div>
                         </div>
                     )
