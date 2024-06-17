@@ -2,10 +2,13 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { FaGithub } from "react-icons/fa";
+import { useDispatch } from "react-redux";
+import { login } from "../redux/userSlice";
 
 export default function SignupPage(): JSX.Element {
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const [userDetails, setUserDetails] = React.useState({
         name: "",
@@ -32,6 +35,7 @@ export default function SignupPage(): JSX.Element {
                 return toast.error(data?.message);
             }
             toast.success(data?.message);
+            dispatch(login(data?.user));
             navigate("/");
         } catch (error) {
             toast.error("An error occurred. Please try again later.");

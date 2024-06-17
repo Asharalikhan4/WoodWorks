@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import toast from "react-hot-toast";
 import { FaGithub } from "react-icons/fa";
 import Cookies from "js-cookie";
+import { login } from "../redux/userSlice";
 
 export default function SigninPage(): JSX.Element {
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const [userDetails, setUserDetails] = useState({
         email: "",
@@ -60,6 +63,7 @@ export default function SigninPage(): JSX.Element {
             }
             Cookies.set("jwt_token", data?.token, { httpOnly: true, sameSite: 'strict' });
             toast.success(data?.message);
+            dispatch(login(data?.User));
             // navigate("/");
         } catch (error) {
             toast.error("An error occurred. Please try again later.");

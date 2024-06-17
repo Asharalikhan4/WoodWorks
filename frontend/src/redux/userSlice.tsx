@@ -1,37 +1,30 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
+import { UserStateTypes } from "../types/userTypes";
 
-interface Address {
-    street: string;
-    houseNumber?: number;
-    zipCode: string;
-    state: string;
-    country: string;
-    phoneNumber: string;
-    additionalInfo?: string;
-};
-
-export interface UserState {
-    name: string;
-    email: string;
-    isAdmin?: boolean;
-    address?: Address;
-    cart?: Array<string>;
-    orders?: Array<string>;
-    wishlist?: Array<string>;
-};
-
-const initialState: UserState = {
+const initialState: UserStateTypes = {
     name: "",
     email: "",
     isAdmin: false,
-}
+    address: {
+        street: "",
+        houseNumber: 0,
+        zipCode: "",
+        state: "",
+        country: "",
+        phoneNumber: "",
+        additionalInfo: "",
+    },
+    cart: undefined,
+    orders: undefined,
+    wishlist: undefined,
+};
 
 export const userSlice = createSlice({
     name: "user",
     initialState,
     reducers: {
-        login: (state, action: PayloadAction<UserState>) => {
+        login: (state, action: PayloadAction<UserStateTypes>) => {
             state.name = action.payload.name;
             state.email = action.payload.email;
             state.isAdmin = action.payload.isAdmin;
@@ -49,16 +42,16 @@ export const userSlice = createSlice({
             state.orders = undefined;
             state.wishlist = undefined;
         },
-        updateCart: (state, action: PayloadAction<string>) => {
+        updateCart: (state, action: PayloadAction<object>) => {
             state.cart?.push(action.payload);
         },
-        removeCart: (state, action: PayloadAction<string>) => {
+        removeCart: (state, action: PayloadAction<object>) => {
             state.cart = state.cart?.filter((item) => item !== action.payload);
         },
-        updateOrders: (state, action: PayloadAction<string>) => {
+        updateOrders: (state, action: PayloadAction<object>) => {
             state.orders?.push(action.payload);
         },
-        updateWishlist: (state, action: PayloadAction<string>) => {
+        updateWishlist: (state, action: PayloadAction<object>) => {
             state.wishlist?.push(action.payload);
         },
     },
