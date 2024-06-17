@@ -11,10 +11,15 @@ export default function Navbar(): JSX.Element {
 
     const [searchOpen, setSearchOpen] = React.useState<boolean>(false);
     const [mobileMenu, setMobileMenu] = React.useState<boolean>(false);
+    const [mobileSearch, setMobileSearch] = React.useState<boolean>(false);
 
     const toggleSearchBar = (): void => {
         setSearchOpen(!searchOpen);
     };
+
+    const toggleMobileSearchBar = (): void => {
+        setMobileSearch(!mobileSearch);
+    }
 
     const handleMenuClick = () => {
         setMobileMenu(!mobileMenu);
@@ -22,17 +27,28 @@ export default function Navbar(): JSX.Element {
 
     return (
         <nav>
-            <div className="bg-white flex justify-between text-black md:hidden lg:hidden items-center h-10 px-2">
-                <div onClick={handleMenuClick}>
-                    {
-                        mobileMenu ? <RxCross2 /> : <RxHamburgerMenu />
-                    }
-                </div>
-                <div className="text-xl font-semibold">WoodWorks.</div>
-                <div className="flex">
-                    <div><GoSearch /></div>
-                    <div><BsCart3 /></div>
-                </div>
+            <div className="mobileContainer py-2 md:hiddden lg:hidden">
+                {
+                    mobileSearch ? (
+                        <div className="flex items-center gap-x-2">
+                            <input type="text" placeholder="Search for products" className="border outline-none w-full py-1 px-2" />
+                            <div className="cursor-pointer" onClick={toggleMobileSearchBar}><RxCross2 className="text-2xl" /></div>
+                        </div>
+                    ) : (
+                        <div className=" bg-white flex justify-between text-black md:hidden lg:hidden items-center text-xl">
+                            <div onClick={handleMenuClick}>
+                                {
+                                    mobileMenu ? <RxCross2 /> : <RxHamburgerMenu />
+                                }
+                            </div>
+                            <div className="">WoodWorks.</div>
+                            <div className="flex space-x-2">
+                            <div className="cursor-pointer" onClick={toggleMobileSearchBar}><GoSearch /></div>
+                                <BsCart3 />
+                            </div>
+                        </div>
+                    )
+                }
             </div>
 
             {
@@ -58,11 +74,11 @@ export default function Navbar(): JSX.Element {
                         </React.Fragment>
                     ) : (
                         <React.Fragment>
-                            <div className="text-2xl cursor-pointer" onClick={toggleSearchBar}><GoSearch /></div>
+                            <div className="cursor-pointer" onClick={toggleSearchBar}><GoSearch /></div>
                             <Link to={"/"}>WoodWorks.</Link>
                             <div className="flex space-x-3">
-                                <Link to={"/signin"} className="text-2xl"><FiUser /></Link>
-                                <Link to={"/cart"} className="text-2xl"><BsCart3 /></Link>
+                                <Link to={"/signin"}><FiUser /></Link>
+                                <Link to={"/cart"}><BsCart3 /></Link>
                             </div>
                         </React.Fragment>
                     )

@@ -35,7 +35,7 @@ export default function FooterList(): JSX.Element {
     };
 
     return (
-        <div className="mobileContainer py-6 md:py-8 md:container md:gap-y-2 md:grid md:grid-cols-1 lg:mx-auto lg:grid-cols-3 lg:gap-x-2">
+        <div className="mobileContainer py-6 grid gap-y-2 md:py-8 md:container md:gap-y-2 md:grid md:grid-cols-1 lg:mx-auto lg:grid-cols-3 lg:gap-x-2">
             {
                 cardsData?.map((card ) => {
                     return <FooterListCard key={card?.id} {...card}/>

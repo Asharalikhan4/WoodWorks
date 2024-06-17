@@ -18,6 +18,7 @@ module.exports = {
       },
       fontFamily: {
         OpenSans: ['"Open Sans"', ...defaultTheme.fontFamily.sans],
+        Assistant: ['"Assistant"', ...defaultTheme.fontFamily.sans],
       }
     },
   },
