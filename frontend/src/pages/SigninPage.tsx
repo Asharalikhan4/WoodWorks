@@ -61,10 +61,11 @@ export default function SigninPage(): JSX.Element {
             if (response.status === 400 || response.ok === false) {
                 return toast.error(data?.message);
             }
-            Cookies.set("jwt_token", data?.token, { httpOnly: true, sameSite: 'strict' });
+            Cookies.set("jwt_token", data?.token);
+            console.log(Cookies.get("jwt_token"), { expires: 7 }); // Expires in 7 days
             toast.success(data?.message);
             dispatch(login(data?.User));
-            // navigate("/");
+            navigate("/");
         } catch (error) {
             toast.error("An error occurred. Please try again later.");
         } finally {

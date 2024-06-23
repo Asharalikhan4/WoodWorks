@@ -34,7 +34,6 @@ export default function Accordion(): JSX.Element {
     ];
 
     const [description, showDescription] = React.useState<boolean>(false);
-    console.log(description);
 
     return (
         <div className="bg-[#F6F6F6] py-6">

@@ -3,7 +3,6 @@ import { createBrowserRouter } from "react-router-dom";
 
 import ProtectedRoute from "../utils/protectedRoutes";
 import isAuthenticated from "../utils/isAuthenticated";
-import Loading from "../components/Loading";
 
 const Layout = lazy(() => import("../config/Layout"));
 const HomePage = lazy(() => import("../pages/HomePage"));
@@ -13,6 +12,8 @@ const ErrorPage = lazy(() => import("../pages/ErrorPage"));
 const CartPage = lazy(() => import("../pages/CartPage"));
 const ReduxPage = lazy(() => import("../pages/ReduxPage"));
 const ProductPage = lazy(() => import("../pages/ProductPage"));
+const ContactUsPage = lazy(() => import("../pages/ContactUsPage"));
+const UserProfilePage = lazy(() => import("../pages/UserProfilePage"));
 
 
 const router = createBrowserRouter([
@@ -49,8 +50,16 @@ const router = createBrowserRouter([
         element: <ProductPage />
       },
       {
-        path: "/loading",
-        element: <Loading />
+        path: "/contact-us",
+        element: <ContactUsPage />
+      },
+      {
+        path: "/user-profile",
+        element: (
+          <ProtectedRoute isAuthenticated={isAuthenticated()}>
+            <UserProfilePage />
+          </ProtectedRoute>
+        )
       }
     ],
     errorElement: <ErrorPage />

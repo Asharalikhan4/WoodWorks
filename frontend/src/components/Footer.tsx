@@ -14,7 +14,7 @@ export default function Footer(): JSX.Element {
                     <h3 className="py-2 text-base text-[#ffffff] md:text-lg">Connect With Us</h3>
                     {
                         ConnectWithUsOptions?.map((option: string, index: number) => (
-                            <div key={index} className="font-light py-2 text-[#ffffffbf] text-xs md:text-sm">{option}</div>
+                            <div key={index} className="font-light py-2 text-[#ffffffbf] text-xs md:text-sm cursor-pointer">{option}</div>
                         ))
                     }
                 </div>
@@ -22,7 +22,7 @@ export default function Footer(): JSX.Element {
                     <h3 className="py-2 text-base text-[#ffffff] md:text-lg">Information</h3>
                     {
                         InformationOptions?.map((option: string, index: number) => (
-                            <div key={index} className="font-light py-2 text-[#ffffffbf] text-xs md:text-sm">{option}</div>
+                            <div key={index} className="font-light py-2 text-[#ffffffbf] text-xs md:text-sm cursor-pointer">{option}</div>
                         ))
                     }
                 </div>
@@ -30,7 +30,7 @@ export default function Footer(): JSX.Element {
                     <div className="py-2 text-base text-[#ffffff] md:text-lg">Navigation</div>
                     {
                         NavigationOptions?.map((option: string, index: number) => (
-                            <div key={index} className="font-light py-2 text-[#ffffffbf] text-xs md:text-sm">{option}</div>
+                            <div key={index} className="font-light py-2 text-[#ffffffbf] text-xs md:text-sm cursor-pointer">{option}</div>
                         ))
                     }
                 </div>

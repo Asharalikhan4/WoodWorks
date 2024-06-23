@@ -1,15 +1,37 @@
-import React from "react";
-import NotificationBar from "./components/NotificationBar";
-import Navbar from "./components/Navbar";
-import DropdownMenu from "./components/DropdownMenu";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { RouterProvider } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
+import router from "./router/Routes";
+import fetchUserData from "./utils/fetchUserData";
+import { login  } from "./redux/userSlice";
 
 export default function App(): JSX.Element {
+
+    const dispatch = useDispatch();
+
+    const userData = async () => {
+        const userData = await fetchUserData();
+        if (userData?.User) {
+            dispatch(login(userData.User));
+        }
+    }
+
+    useEffect(() => {
+        userData();
+    });
+
     return (
-        <div className="text-4xl">
-            <NotificationBar />
-            <Navbar />
-            <DropdownMenu />
-            <h1>Hello, World!</h1>
-        </div>
+        <>
+            <RouterProvider router={router} />
+            <Toaster
+                position="top-center"
+                reverseOrder={false}
+                gutter={8}
+                toastOptions={{
+                    duration: 4000,
+                }}
+            />
+        </>
     );
 };

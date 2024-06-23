@@ -9,6 +9,7 @@ interface AddressTypes {
 };
 
 export interface UserStateTypes {
+    User(User: any): { payload: UserStateTypes; type: "user/login"; };
     name: string;
     email: string;
     isAdmin?: boolean;

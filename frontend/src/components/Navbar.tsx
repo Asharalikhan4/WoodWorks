@@ -1,17 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { GoSearch } from "react-icons/go";
 import { FiUser } from "react-icons/fi";
 import { BsCart3 } from "react-icons/bs";
 import { RxCross2, RxHamburgerMenu } from "react-icons/rx";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const NavbarMenuItems: string[] = ["Living Room", "Bedroom", "Cabinetry", "Dining & Kitchen", "Seating", "LKH Collection", "Home Essentials"];
 
 export default function Navbar(): JSX.Element {
 
-    const [searchOpen, setSearchOpen] = React.useState<boolean>(false);
-    const [mobileMenu, setMobileMenu] = React.useState<boolean>(false);
-    const [mobileSearch, setMobileSearch] = React.useState<boolean>(false);
+    const [searchOpen, setSearchOpen] = useState<boolean>(false);
+    const [mobileMenu, setMobileMenu] = useState<boolean>(false);
+    const [mobileSearch, setMobileSearch] = useState<boolean>(false);
+    const [signin, setSignin] = useState<boolean>(false);
+    const [isDropdownVisible, setIsDropdownVisible] = useState<boolean>(false);
+
+    const user = useSelector((state: any) => state.user.name);
 
     const toggleSearchBar = (): void => {
         setSearchOpen(!searchOpen);
@@ -25,8 +30,21 @@ export default function Navbar(): JSX.Element {
         setMobileMenu(!mobileMenu);
     };
 
+    const handleSignin = () => {
+        setSignin(!signin);
+    };
+
+    const handleMouseEnter = () => {
+        setIsDropdownVisible(true);
+    };
+
+    const handleMouseLeave = () => {
+        setIsDropdownVisible(false);
+    };
+
     return (
         <nav>
+            {/* Mobile Navbar */}
             <div className="mobileContainer py-2 md:hiddden lg:hidden">
                 {
                     mobileSearch ? (
@@ -65,7 +83,8 @@ export default function Navbar(): JSX.Element {
                 )
             }
 
-            <div className="hidden md:container md:mx-auto md:flex md:justify-between md:text-2xl md:py-6">
+            {/* Tablet and Laptop Navbar */}
+            <div className="hidden md:container md:mx-auto md:flex md:justify-between md:items-center md:text-2xl md:py-6">
                 {
                     searchOpen ? (
                         <React.Fragment>
@@ -74,11 +93,30 @@ export default function Navbar(): JSX.Element {
                         </React.Fragment>
                     ) : (
                         <React.Fragment>
-                            <div className="cursor-pointer" onClick={toggleSearchBar}><GoSearch /></div>
-                            <Link to={"/"}>WoodWorks.</Link>
-                            <div className="flex space-x-3">
-                                <Link to={"/signin"}><FiUser /></Link>
+                            <div className="cursor-pointer w-24 flex items-center justify-start" onClick={toggleSearchBar}><GoSearch /></div>
+                            <Link className="" to={"/"}>WoodWorks.</Link>
+                            <div className="w-24 flex items-center justify-end space-x-4">
                                 <Link to={"/cart"}><BsCart3 /></Link>
+                                {
+                                    user ? (
+                                        <div className="relative"
+                                            onMouseEnter={handleMouseEnter}
+                                            onMouseLeave={handleMouseLeave}>
+                                            <Link to={"/user-profile"} onClick={handleSignin} className="text-xl">{user.split(" ")[0]}</Link>
+                                            {isDropdownVisible && (
+                                                <div className="absolute right-0 mt-2 w-48 bg-white text-black rounded-md shadow-lg">
+                                                    <ul>
+                                                        <li className="p-2 hover:bg-gray-200">Option 1</li>
+                                                        <li className="p-2 hover:bg-gray-200">Option 2</li>
+                                                        <li className="p-2 hover:bg-gray-200">Option 3</li>
+                                                    </ul>
+                                                </div>
+                                            )}
+                                        </div>
+                                    ) : (
+                                        <Link to={"/signin"} onClick={handleSignin}><FiUser /></Link>
+                                    )
+                                }
                             </div>
                         </React.Fragment>
                     )
