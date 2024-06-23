@@ -18,4 +18,5 @@ export default interface ProductDocument extends Document {
     avaliableQuantity: number;
     flashSale?: FlashSale;
     ratings: number;
+    type: string;
 }

@@ -4,6 +4,13 @@ import User from "../models/UserModel.js";
 import GenerateToken from "../utils/GenerateToken.js";
 import SaveToken from "../utils/SaveToken.js";
 
+interface AuthRequest extends Request {
+    user?: {
+        userId: string;
+    };
+}
+
+
 export async function Signup(req: Request, res: Response) {
     try {
         const { name, email, password } = req.body;
@@ -62,6 +69,23 @@ export async function Signin(req: Request, res: Response) {
 
         return res.status(200).json({ message: "User logged in successfully", User: userData, token: token });
 
+    } catch (error) {
+        return res.status(500).json({ message: "Internal server error" });
+    }
+};
+
+export async function getUserData(req: AuthRequest, res: Response) {
+    try {
+        if (!req.user) {
+            res.status(401).json({ message: 'Unauthorized' });
+            return;
+        }
+        const user = await User.findById(req.user.userId).select("-password -token");
+        if (!user) {
+            res.status(404).json({ message: 'User not found' });
+            return;
+        }
+        return res.status(200).json({ User: user });
     } catch (error) {
         return res.status(500).json({ message: "Internal server error" });
     }

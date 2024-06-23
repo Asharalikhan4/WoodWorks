@@ -13,3 +13,13 @@ const GenerateToken = (userId: string, email: string): string => {
 };
 
 export default GenerateToken;
+
+
+
+// function convertString(str) {
+//     return str.toLowerCase().replace(/ /g, '-');
+// }
+
+// const inputString = "Bowls & Boards";
+// const outputString = convertString(inputString);
+// console.log(outputString);

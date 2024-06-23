@@ -51,6 +51,9 @@ const ProductSchema: Schema = new Schema<ProductDocument>({
     },
     ratings: {
         type: Number
+    },
+    type: {
+        type: String,
     }
 }, {
     timestamps: true
