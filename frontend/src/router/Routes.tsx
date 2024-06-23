@@ -1,16 +1,19 @@
-import React from "react";
+import React, { lazy } from "react";
 import { createBrowserRouter } from "react-router-dom";
 
-import Layout from "../config/Layout";
-import ErrorPage from "../pages/ErrorPage";
-import SigninPage from "../pages/SigninPage";
-import SignupPage from "../pages/SignupPage";
-import CartPage from "../pages/CartPage";
-import HomePage from "../pages/HomePage";
-import ReduxPage from "../pages/ReduxPage";
 import ProtectedRoute from "../utils/protectedRoutes";
 import isAuthenticated from "../utils/isAuthenticated";
-import ProductPage from "../pages/ProductPage";
+import Loading from "../components/Loading";
+
+const Layout = lazy(() => import("../config/Layout"));
+const HomePage = lazy(() => import("../pages/HomePage"));
+const SigninPage = lazy(() => import("../pages/SigninPage"));
+const SignupPage = lazy(() => import("../pages/SignupPage"));
+const ErrorPage = lazy(() => import("../pages/ErrorPage"));
+const CartPage = lazy(() => import("../pages/CartPage"));
+const ReduxPage = lazy(() => import("../pages/ReduxPage"));
+const ProductPage = lazy(() => import("../pages/ProductPage"));
+
 
 const router = createBrowserRouter([
   {
@@ -44,6 +47,10 @@ const router = createBrowserRouter([
       {
         path: "/product/:id",
         element: <ProductPage />
+      },
+      {
+        path: "/loading",
+        element: <Loading />
       }
     ],
     errorElement: <ErrorPage />

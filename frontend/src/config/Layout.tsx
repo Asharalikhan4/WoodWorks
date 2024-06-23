@@ -1,8 +1,9 @@
-import React, { Fragment } from "react";
+import React, { Suspense, lazy } from "react";
 import { Outlet, useLocation } from "react-router-dom";
+import Loading from "../components/Loading";
 
-import Footer from "../components/Footer";
-import Header from "../components/Header";
+const Header = lazy(() => import("../components/Header"));
+const Footer = lazy(() => import("../components/Footer"));
 
 export default function Layout() {
 
@@ -10,12 +11,12 @@ export default function Layout() {
     const lastPathSegment = location?.pathname.split('/').pop();
 
     return (
-        <Fragment>
+        <Suspense fallback={<Loading />}>
             <Header />
             <Outlet />
             {
                 lastPathSegment !== "signin" && lastPathSegment !== "signup" && lastPathSegment !== "redux" ? <Footer /> : null
             }
-        </Fragment>
+        </Suspense>
     );
 };
