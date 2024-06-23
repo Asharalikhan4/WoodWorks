@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import Cookies from "js-cookie";
 import { GoSearch } from "react-icons/go";
 import { FiUser } from "react-icons/fi";
 import { BsCart3 } from "react-icons/bs";
@@ -40,6 +41,12 @@ export default function Navbar(): JSX.Element {
 
     const handleMouseLeave = () => {
         setIsDropdownVisible(false);
+    };
+
+    const handleLogout = () => {
+        console.log("Logging out...");
+        Cookies.remove("jwt_token");
+        window.location.reload();
     };
 
     return (
@@ -102,13 +109,12 @@ export default function Navbar(): JSX.Element {
                                         <div className="relative"
                                             onMouseEnter={handleMouseEnter}
                                             onMouseLeave={handleMouseLeave}>
-                                            <Link to={"/user-profile"} onClick={handleSignin} className="text-xl">{user.split(" ")[0]}</Link>
+                                            <div onClick={handleSignin} className="text-xl cursor-pointer">{user.split(" ")[0]}</div>
                                             {isDropdownVisible && (
-                                                <div className="absolute right-0 mt-2 w-48 bg-white text-black rounded-md shadow-lg">
+                                                <div className="absolute top-5 left-5 right-0 mt-2 w-48 bg-white text-black shadow-lg text-lg cursor-pointer rounded-md">
                                                     <ul>
-                                                        <li className="p-2 hover:bg-gray-200">Option 1</li>
-                                                        <li className="p-2 hover:bg-gray-200">Option 2</li>
-                                                        <li className="p-2 hover:bg-gray-200">Option 3</li>
+                                                        <Link to={"/user-profile"}  className="p-2">Profile</Link>
+                                                        <li className="p-2" onClick={handleLogout}>Logout</li>
                                                     </ul>
                                                 </div>
                                             )}
