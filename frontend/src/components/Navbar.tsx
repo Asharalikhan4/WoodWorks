@@ -70,7 +70,7 @@ export default function Navbar(): JSX.Element {
                                     mobileMenu ? <RxCross2 /> : <RxHamburgerMenu />
                                 }
                             </div>
-                            <Link to={"/"}>WoodWorks.</Link>
+                            <Link className="font-semibold" to={"/"}>WoodWorks.</Link>
                             <div className="w-24 flex items-center justify-end space-x-3">
                                 <div className="cursor-pointer" onClick={toggleMobileSearchBar}><GoSearch /></div>
                                 <Link to={"/cart"}><BsCart3 /></Link>
@@ -82,7 +82,7 @@ export default function Navbar(): JSX.Element {
 
             {
                 mobileMenu ? (
-                    <div className="flex flex-col h-[calc(100vh-4rem)] px-6 py-6 text-lg overflow-y-auto">
+                    <div className="flex flex-col min-h-[calc(100vh-8rem)] max-h-[calc(100vh-8rem)] px-6 py-6 text-lg overflow-y-auto">
                         <div className="flex-grow space-y-4">
                             {
                                 NavbarMenuItems?.map((item: string, index: number) => (
@@ -90,10 +90,12 @@ export default function Navbar(): JSX.Element {
                                 ))
                             }
                         </div>
-                        <Link to={"/signin"} onClick={closeSideMenu} className="mt-auto pb-4 text-xl flex items-center gap-x-2">
-                            <FiUser />
-                            Sigin
-                        </Link>
+                        <div className="mt-auto pt-4">
+                            <Link to={"/signin"} onClick={closeSideMenu} className="text-xl flex items-center gap-x-2">
+                                <FiUser />
+                                Sign in
+                            </Link>
+                        </div>
                     </div>
                 ) : (
                     <></>
