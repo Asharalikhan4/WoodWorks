@@ -13,12 +13,10 @@ const ProductSchema: Schema = new Schema<ProductDocument>({
         type: String,
         required: true
     },
-    img: [
-        {
-            type: String,
-            required: true
-        }
-    ],
+    img: {
+        type: [String],
+        required: true
+    },
     description: {
         type: String,
         required: true
