@@ -3,7 +3,7 @@ import Product from "../models/ProductModel.js";
 
 export async function CreateProduct(req: Request, res:Response) {
     try {
-        const {available, title, img, description, inStock, price, avaliableQuantity, flashSale, ratings} = req.body;
+        const {available, title, img, description, inStock, price, avaliableQuantity, flashSale, ratings, category} = req.body;
         if (!available || !title || !img || !description || !inStock || !price || !avaliableQuantity || !ratings) {
             return res.status(400).json({ message: "All fields are required" });
         };
@@ -16,7 +16,8 @@ export async function CreateProduct(req: Request, res:Response) {
             price, 
             avaliableQuantity, 
             flashSale, 
-            ratings
+            ratings,
+            category
         });
         await product.save();
         return res.status(201).json({ message: "Product Created Successfully", Product: product });
@@ -52,7 +53,7 @@ export async function UpdateProduct(req: Request, res: Response) {
         if (!product) {
             return res.status(404).json({ message: "Product not found" });
         };
-        const {available, title, img, description, inStock, price, avaliableQuantity, flashSale, ratings} = req.body;
+        const {available, title, img, description, inStock, price, avaliableQuantity, flashSale, ratings, category} = req.body;
         if (available) {
             product.available = available;
         };
@@ -80,6 +81,9 @@ export async function UpdateProduct(req: Request, res: Response) {
         if (ratings) {
             product.ratings = ratings;
         };
+        if (category) {
+            product.category = category;
+        }
         await product.save();
         return res.status(200).json({ message: "Product Updated Successfully", Product: product });
     } catch (error) {

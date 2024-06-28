@@ -10,3 +10,4 @@ tmp/
 out-tsc/
 bazel-out/
 .env
+data/

@@ -1,5 +1,4 @@
 import mongoose, { Document } from "mongoose";
-
 interface Address extends Document {
     street: string;
     houseNumber?: number;
@@ -9,7 +8,6 @@ interface Address extends Document {
     phoneNumber: string;
     additionalInfo?: string;
 };
-
 export default interface UserDocument extends Document {
     name: string;
     email: string;

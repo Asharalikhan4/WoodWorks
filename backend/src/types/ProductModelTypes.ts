@@ -6,7 +6,6 @@ interface FlashSale {
     startDate: Date | undefined;
     endDate: Date | undefined;
 }
-
 export default interface ProductDocument extends Document {
     available: boolean;
     totalSales?: number;
@@ -18,5 +17,5 @@ export default interface ProductDocument extends Document {
     avaliableQuantity: number;
     flashSale?: FlashSale;
     ratings: number;
-    type: string;
+    category: string;
 }

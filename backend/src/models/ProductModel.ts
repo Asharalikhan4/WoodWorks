@@ -11,7 +11,8 @@ const ProductSchema: Schema = new Schema<ProductDocument>({
     },
     title: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     img: {
         type: [String],
@@ -50,11 +51,20 @@ const ProductSchema: Schema = new Schema<ProductDocument>({
     ratings: {
         type: Number
     },
-    type: {
+    category: {
         type: String,
+        required: true
     }
 }, {
     timestamps: true
 });
+
+ProductSchema.pre<ProductDocument>("save", function (next) {
+    if (this.isModified("category")) {
+        this.category = this.category.toLowerCase().split(" ").join("-");
+    }
+    next();
+});
+
 const Product: Model<ProductDocument> = model<ProductDocument>("Product", ProductSchema);
 export default Product;

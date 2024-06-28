@@ -1,7 +1,7 @@
 import express from 'express';
 const router = express.Router();
 
-import { Signin, Signup, getUserData } from '../controllers/UserControllers.js';
+import { Signup ,Signin, getUserData } from '../userControllers/UserAuthControllers.js';
 import TokenVerification from '../middlewares/TokenVerification.js';
 
 router.post("/signup", Signup);
