@@ -4,7 +4,6 @@ import { UserStateTypes } from "../types/userTypes";
 const fetchUserData = async () => {
     try {
         const token = Cookies.get("jwt_token");
-        console.log('Fetching user data...', token);
 
         if (!token) {
             throw new Error('No token found');
@@ -25,7 +24,7 @@ const fetchUserData = async () => {
         const userData: UserStateTypes = await response.json();
         return userData;
     } catch (error) {
-        console.error('Error fetching user data:', error);
+        // console.error('Error fetching user data:', error);
         Cookies.remove('token');
     }
 };

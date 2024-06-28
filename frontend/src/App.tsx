@@ -4,7 +4,9 @@ import { RouterProvider } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import router from "./router/Routes";
 import fetchUserData from "./utils/fetchUserData";
+import fetchAllProducts from "./api/fetchAllProducts";
 import { login  } from "./redux/userSlice";
+import { updateProduct } from "./redux/productSlice";
 
 export default function App(): JSX.Element {
 
@@ -15,6 +17,8 @@ export default function App(): JSX.Element {
         if (userData?.User) {
             dispatch(login(userData.User));
         }
+        const products = await fetchAllProducts();
+        dispatch(updateProduct(products));
     }
 
     useEffect(() => {

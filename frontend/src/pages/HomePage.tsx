@@ -1,4 +1,6 @@
 import React from "react";
+import { useSelector } from "react-redux";
+
 import ProductList from "../components/ProductList";
 import MadeInIndia from "../components/HomePageComponents/MadeInIndia";
 import MadeToOrder from "../components/HomePageComponents/MadeToOrder";

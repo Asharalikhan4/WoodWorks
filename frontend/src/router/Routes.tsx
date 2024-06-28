@@ -14,6 +14,7 @@ const ReduxPage = lazy(() => import("../pages/ReduxPage"));
 const ProductPage = lazy(() => import("../pages/ProductPage"));
 const ContactUsPage = lazy(() => import("../pages/ContactUsPage"));
 const UserProfilePage = lazy(() => import("../pages/UserProfilePage"));
+const CollectionsPage = lazy(() => import("../pages/CollectionsPage"));
 
 
 const router = createBrowserRouter([
@@ -60,6 +61,10 @@ const router = createBrowserRouter([
             <UserProfilePage />
           </ProtectedRoute>
         )
+      },
+      {
+        path: "/collections/:name",
+        element: <CollectionsPage />
       }
     ],
     errorElement: <ErrorPage />
