@@ -1,1 +1,0 @@
-import home from "./src/index.js"
