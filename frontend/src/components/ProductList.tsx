@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import ProductCard from "./ProductCard";
+import Button from "./Button";
 interface ProductListTypes {
     heading: string;
     subHeading?: string;
@@ -37,8 +38,8 @@ export default function ProductList(props: ProductListTypes): JSX.Element {
                 <ProductCard imageUrl="https://www.lakkadhaara.com/cdn/shop/files/YokoRattanBedside6.png?v=1706459974&width=533" productName="Yokko Rattan Bedside" productPrice={16000} /> */}
             </div>
 
-            <div className="flex justify-center">
-                <Link to={`/collections/${productType}`} className="border-2 border-gray-400 px-7 py-2">View All</Link>
+            <div className="flex justify-center w-full">
+                <Button className={"border-2 border-gray-400 px-7 py-2"} buttonName={"View All"} link={`/collections/${productType}`} />
             </div>
         </div>
     );
