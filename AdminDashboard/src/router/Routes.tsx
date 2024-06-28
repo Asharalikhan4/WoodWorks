@@ -10,6 +10,7 @@ import SignupPage from "../pages/SignupPage";
 import isAuthenticated from "../utils/isAuthenticated";
 import ProtectedRoute from "../utils/protectedRoute";
 import UsersPage from "../pages/UsersPage";
+import AddProductPage from "../pages/AddProductPage";
 
 const router = createBrowserRouter([
     {
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
                         <UsersPage />
                     </ProtectedRoute>
                 ),
+            },
+            {
+                path: "/add-product",
+                element: <AddProductPage />,
             }
         ],
         errorElement: <ErrorPage />,

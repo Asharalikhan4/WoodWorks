@@ -9,7 +9,7 @@ const Sidebar: React.FC<SidebarProps> = ({ links }) => {
   const location = useLocation();
 
   return (
-    <div className="lg:w-64 bg-gray-800 h-screen">
+    <div className="hidden lg:block lg:w-64 bg-gray-800 h-screen">
       <div className="flex flex-col p-4 space-y-2">
         {links.map((link) => (
           <Link

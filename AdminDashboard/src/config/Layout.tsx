@@ -6,7 +6,8 @@ const links = [
     { label: 'Home', path: '/' },
     { label: 'About', path: '/about-us' },
     { label: 'Contact', path: '/contact-us' },
-    { label: "Users", path: "/users"}
+    { label: "Users", path: "/users"},
+    { label: "Add Product", path: "/add-product"}
 ];
 
 export default function Layout(): JSX.Element {
