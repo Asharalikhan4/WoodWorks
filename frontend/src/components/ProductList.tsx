@@ -32,10 +32,6 @@ export default function ProductList(props: ProductListTypes): JSX.Element {
                         <ProductCard imageUrl={product?.img[0]} productName={product?.title} productPrice={product?.price} />
                     ))
                 }
-                {/* <ProductCard imageUrl="https://www.lakkadhaara.com/cdn/shop/files/MalibuChestOfDrawer10.png?v=1717823151&width=533" productName="Malibu Chest Of Drawer" productPrice={64000} />
-                <ProductCard imageUrl="https://www.lakkadhaara.com/cdn/shop/files/TribalPeacockLakkadhaara.png?v=1706604272&width=533" productName="Tribal Peacock" productPrice={1800} />
-                <ProductCard imageUrl="https://www.lakkadhaara.com/cdn/shop/files/YokoRattanTVUnit7.png?v=1706461404&width=533" productName="Yokko Rattan TV Unit" productPrice={44000} />
-                <ProductCard imageUrl="https://www.lakkadhaara.com/cdn/shop/files/YokoRattanBedside6.png?v=1706459974&width=533" productName="Yokko Rattan Bedside" productPrice={16000} /> */}
             </div>
 
             <div className="flex justify-center w-full">
