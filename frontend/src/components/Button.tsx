@@ -1,8 +1,14 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import ButtonPropsTypes from "../types/ButtonPropsTypes";
 
-const Button: React.FC = () => {
+const Button: React.FC<ButtonPropsTypes> = ({ buttonName, className, link, onClick }) => {
     return (
-        <button className="border-2 border-gray-400 px-7 py-2">View All</button>
+        link ? (
+            <Link to={link} className={className}>{buttonName}</Link>
+        ) : (
+            <button className={className} onClick={onClick}>{buttonName}</button>
+        )
     );
 };
 
