@@ -1,19 +1,19 @@
-import { config } from "./config/config.js";
+import { config } from "./src/config/config.js";
 import express, { Request, Response } from "express";
 import cors from "cors";
 const app = express();
 
 // Database Connection
-import DatabaseConnection from "./config/DatabaseConnection.js";
+import DatabaseConnection from "./src/config/DatabaseConnection.js";
 
 // User Routes
-import UserAuthRoutes from "./userRoutes/UserAuthRoutes.js";
-import UserProductRoutes from "./userRoutes/UserProductRoutes.js"
+import UserAuthRoutes from "./src/userRoutes/UserAuthRoutes.js";
+import UserProductRoutes from "./src/userRoutes/UserProductRoutes.js"
 
 // Admin Routes
-import AdminUserRoutes from "./adminRoutes/AdminUserRoutes.js";
-import AdminProductRoutes from "./adminRoutes/AdminProductRoutes.js";
-import AdminAuthRoutes from "./adminRoutes/AdminAuthRoutes.js";
+import AdminUserRoutes from "./src/adminRoutes/AdminUserRoutes.js";
+import AdminProductRoutes from "./src/adminRoutes/AdminProductRoutes.js";
+import AdminAuthRoutes from "./src/adminRoutes/AdminAuthRoutes.js";
 
 // Middlewares
 app.use(express.json());
