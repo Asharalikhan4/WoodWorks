@@ -3,6 +3,7 @@ import { createBrowserRouter } from "react-router-dom";
 
 import ProtectedRoute from "../utils/protectedRoutes";
 import isAuthenticated from "../utils/isAuthenticated";
+import ScrollToTop from "../components/ScrollToTop";
 
 const Layout = lazy(() => import("../config/Layout"));
 const HomePage = lazy(() => import("../pages/HomePage"));
@@ -20,7 +21,12 @@ const CollectionsPage = lazy(() => import("../pages/CollectionsPage"));
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout />,
+    element: (
+      <>
+        <ScrollToTop />
+        <Layout />
+      </>
+    ),
     children: [
       {
         path: "/",
